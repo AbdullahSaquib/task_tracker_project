@@ -1,0 +1,26 @@
+version: "3.3"
+   
+services:
+  web:
+    restart: always
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+  redis:
+    restart: always
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
+  celery:
+    restart: always
+    build: .
+    command: celery -A task_tracker_project.celery worker --loglevel=info
+    depends_on:
+      redis:
+        condition: service_started
+  celery-beat:
+    restart: always
+    build: .
+    command: celery -A task_tracker_project.celery beat

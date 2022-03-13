@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+uzmso*cc*@m^ban39pf-+2bo%qlrfrl3&*cq8o$v*g75aq4*v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["tasktracker.abdullahsaquib.com", "127.0.0.1"]
 
 
 # Application definition
@@ -135,7 +135,7 @@ AUTH_USER_MODEL = 'task_tracker.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_BROKER_URL = "redis://redis:6379/0"
 CELERY_TIMEZONE = "Asia/Kolkata"
 CELERY_BEAT_SCHEDULE = {
     'notify-missed-tasks': {
