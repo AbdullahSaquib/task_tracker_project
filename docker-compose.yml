@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - /db
+      - db-data:/db
   redis:
     restart: always
     image: redis
@@ -26,3 +26,5 @@ services:
     restart: always
     build: .
     command: celery -A task_tracker_project.celery beat
+volumes:
+  db-data: {}
